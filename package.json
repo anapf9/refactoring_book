@@ -1,0 +1,21 @@
+{
+  "name": "refactoring_book",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "exec-1": "node ./capitulo-1/pecas-e-genhos.js --es-module-specifier-resolution=node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anapf9/refactoring_book.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anapf9/refactoring_book/issues"
+  },
+  "homepage": "https://github.com/anapf9/refactoring_book#readme"
+}
