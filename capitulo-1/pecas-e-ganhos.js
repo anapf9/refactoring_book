@@ -10,8 +10,8 @@ export function statement(invoice, plays) {
   }).format;
 
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID];
-    const amount =  valorPara(perf, play)
+    const play = playFor(perf);
+    const amount = valorPara(perf, play)
 
     // soma créditos por volume
     volumeCredits += Math.max(perf.audience - 30, 0);
@@ -27,6 +27,10 @@ export function statement(invoice, plays) {
   result += `You earned ${volumeCredits} credits\n`;
   // console.log(result)
   return result;
+}
+
+function playFor(aPerformance) {
+  return plays[aPerformance.playID]
 }
 
 function valorPara(aPerformance, play) {
