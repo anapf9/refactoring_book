@@ -37,17 +37,16 @@ export function statement(invoice, plays) {
     minimumFractionDigits: 2,
   }).format;
 
-  for (let perf of invoice.performances) {
-    const amount = valorPara(perf, playFor(perf))
+  for (let performance of invoice.performances) {
     // soma créditos por volume
-    volumeCredits += Math.max(perf.audience - 30, 0);
+    volumeCredits += Math.max(performance.audience - 30, 0);
     // soma um crédito extra para cada dez espectadores de comédia
-    if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+    if ("comedy" === playFor(performance).type) volumeCredits += Math.floor(performance.audience / 5);
     // exibe a linha para esta requisição
-    result += ` ${playFor(perf).name}: ${format(amount / 100)} (${
-      perf.audience
+    result += ` ${playFor(performance).name}: ${format(valorPara(performance) / 100)} (${
+      performance.audience
     } seats)\n`;
-    totalAmount += amount;
+    totalAmount += valorPara(performance);
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
