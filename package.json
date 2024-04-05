@@ -2,10 +2,10 @@
   "name": "refactoring_book",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watch",
+    "test:cov": "jest --coverage",
     "exec-1": "node ./capitulo-1/pecas-e-genhos.js --es-module-specifier-resolution=node"
   },
   "repository": {
@@ -17,5 +17,28 @@
   "bugs": {
     "url": "https://github.com/anapf9/refactoring_book/issues"
   },
-  "homepage": "https://github.com/anapf9/refactoring_book#readme"
+  "homepage": "https://github.com/anapf9/refactoring_book#readme",
+  "dependencies": {},
+  "jest": {
+    "verbose": true,
+    "rootDir": "./",
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/coverage/"
+    ],
+    "transform": {
+      "\\.[jt]sx?$": "babel-jest"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.1.0",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0"
+  }
 }
