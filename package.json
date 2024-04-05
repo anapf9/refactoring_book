@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "jest --watch",
+    "test": "jest --watchAll",
     "test:cov": "jest --coverage",
     "exec-1": "node ./capitulo-1/pecas-e-genhos.js --es-module-specifier-resolution=node"
   },

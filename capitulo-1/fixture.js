@@ -4,7 +4,7 @@ export const pecas = {
   othello: { name: "Othello", type: "tragedy" },
 };
 
-export const eventos = [
+export const eventos = // [
   {
     customer: "BigCo",
     performances: [
@@ -21,5 +21,5 @@ export const eventos = [
         audience: 40,
       },
     ],
-  },
-];
+  }
+// ];

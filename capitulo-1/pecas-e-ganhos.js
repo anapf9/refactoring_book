@@ -1,6 +1,4 @@
 export function statement(invoice, plays) {
-  console.log("fdfdfxdf", JSON.stringify(invoice), invoice[0].performances);
-
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `Statement for ${invoice.customer}\n`;
@@ -11,7 +9,7 @@ export function statement(invoice, plays) {
     minimumFractionDigits: 2,
   }).format;
 
-  for (let perf of invoice[0].performances) {
+  for (let perf of invoice.performances) {
     const play = plays[perf.playID];
     let thisAmount = 0;
     switch (play.type) {
@@ -43,7 +41,6 @@ export function statement(invoice, plays) {
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
+  // console.log(result)
   return result;
 }
-
-//module.exports = { statement };
