@@ -31,9 +31,9 @@ function playFor(aPerformance) {
   return plays[aPerformance.playID]
 }
 
-function valorPara(aPerformance, play) {
+function valorPara(aPerformance) {
   let result = 0;
-  switch (play.type) {
+  switch (playFor(aPerformance).type) {
     case "tragedy":
       result = 40000;
       if (aPerformance.audience > 30) {
@@ -48,7 +48,7 @@ function valorPara(aPerformance, play) {
       result += 300 * aPerformance.audience;
       break;
     default:
-      throw new Error(`unknown type: ${play.type}`);
+      throw new Error(`unknown type: ${playFor(aPerformance).type}`);
   }
 
   return result
