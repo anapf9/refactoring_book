@@ -1,6 +1,6 @@
 export function statement(invoice, plays) {
   let totalAmount = 0;
-  let volumeCredits = 0;
+
   let result = `Statement for ${invoice.customer}\n`;
 
   function playFor(aPerformance) {
@@ -30,11 +30,12 @@ export function statement(invoice, plays) {
     return result;
   }
 
+  let volumeCredits = 0;
+
   function volumeDeCreditosPara(performance) {
     let result = 0;
-
     result += Math.max(performance.audience - 30, 0);
-    // soma um crédito extra para cada dez espectadores de comédia
+
     if ("comedy" === playFor(performance).type)
       result += Math.floor(performance.audience / 5);
     return result;
