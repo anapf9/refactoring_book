@@ -1,6 +1,4 @@
 export function statement(invoice, plays) {
-  let totalAmount = 0;
-
   let result = `Statement for ${invoice.customer}\n`;
 
   function playFor(aPerformance) {
@@ -40,12 +38,21 @@ export function statement(invoice, plays) {
   }
 
   function totalVolumeDeCreditos() {
-    let volumeCredits = 0;
+    let result = 0;
 
     for (let performance of invoice.performances) {
-      volumeCredits += volumeDeCreditosPara(performance);
+      result += volumeDeCreditosPara(performance);
     }
-    return volumeCredits;
+    return result;
+  }
+
+  function montanteTotal() {
+    let result = 0;
+
+    for (let performance of invoice.performances) {
+      result += valorPara(performance);
+    }
+    return result;
   }
 
   for (let performance of invoice.performances) {
@@ -54,11 +61,7 @@ export function statement(invoice, plays) {
     } seats)\n`;
   }
 
-  for (let performance of invoice.performances) {
-    totalAmount += valorPara(performance);
-  }
-
-  result += `Amount owed is ${dolar(totalAmount)}\n`;
+  result += `Amount owed is ${dolar(montanteTotal())}\n`;
   result += `You earned ${totalVolumeDeCreditos()} credits\n`;
 
   return result;
