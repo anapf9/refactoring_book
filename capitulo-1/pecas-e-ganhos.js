@@ -45,18 +45,18 @@ export function statement(invoice, plays) {
       style: "currency",
       currency: "USD",
       minimumFractionDigits: 2,
-    }).format(valor);
+    }).format(valor / 100);
   }
 
   for (let performance of invoice.performances) {
     volumeCredits += volumeDeCreditosPara(performance);
 
-    result += ` ${playFor(performance).name}: ${dolar(valorPara(performance) / 100)} (${
+    result += ` ${playFor(performance).name}: ${dolar(valorPara(performance))} (${
       performance.audience
     } seats)\n`;
     totalAmount += valorPara(performance);
   }
-  result += `Amount owed is ${dolar(totalAmount / 100)}\n`;
+  result += `Amount owed is ${dolar(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   // console.log(result)
   return result;
