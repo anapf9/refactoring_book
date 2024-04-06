@@ -1,6 +1,6 @@
 export function statement(invoice, plays) {
   let totalAmount = 0;
-
+  let volumeCredits = 0;
   let result = `Statement for ${invoice.customer}\n`;
 
   function playFor(aPerformance) {
@@ -31,13 +31,13 @@ export function statement(invoice, plays) {
   }
 
   function volumeDeCreditosPara(performance) {
-    let volumeCredits = 0;
+    let result = 0;
 
-    volumeCredits += Math.max(performance.audience - 30, 0);
+    result += Math.max(performance.audience - 30, 0);
     // soma um crédito extra para cada dez espectadores de comédia
     if ("comedy" === playFor(performance).type)
-      volumeCredits += Math.floor(performance.audience / 5);
-    return volumeCredits;
+      result += Math.floor(performance.audience / 5);
+    return result;
   }
 
   const format = new Intl.NumberFormat("en-US", {
@@ -47,16 +47,15 @@ export function statement(invoice, plays) {
   }).format;
 
   for (let performance of invoice.performances) {
-    // soma créditos por volume
+    volumeCredits += volumeDeCreditosPara(performance);
 
-    // exibe a linha para esta requisição
     result += ` ${playFor(performance).name}: ${format(valorPara(performance) / 100)} (${
       performance.audience
     } seats)\n`;
     totalAmount += valorPara(performance);
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
-  result += `You earned ${volumeDeCreditosPara(performance)} credits\n`;
+  result += `You earned ${volumeCredits} credits\n`;
   // console.log(result)
   return result;
 }
