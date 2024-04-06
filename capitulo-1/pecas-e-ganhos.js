@@ -37,7 +37,7 @@ export function statement(invoice, plays) {
     // soma um crédito extra para cada dez espectadores de comédia
     if ("comedy" === playFor(performance).type)
       volumeCredits += Math.floor(performance.audience / 5);
-    return;
+    return volumeCredits;
   }
 
   const format = new Intl.NumberFormat("en-US", {
