@@ -30,8 +30,6 @@ export function statement(invoice, plays) {
     return result;
   }
 
-  let volumeCredits = 0;
-
   function volumeDeCreditosPara(performance) {
     let result = 0;
     result += Math.max(performance.audience - 30, 0);
@@ -41,8 +39,13 @@ export function statement(invoice, plays) {
     return result;
   }
 
-  for (let performance of invoice.performances) {
-    volumeCredits += volumeDeCreditosPara(performance);
+  function totalVolumeDeCreditos() {
+    let volumeCredits = 0;
+
+    for (let performance of invoice.performances) {
+      volumeCredits += volumeDeCreditosPara(performance);
+    }
+    return volumeCredits;
   }
 
   for (let performance of invoice.performances) {
@@ -56,7 +59,7 @@ export function statement(invoice, plays) {
   }
 
   result += `Amount owed is ${dolar(totalAmount)}\n`;
-  result += `You earned ${volumeCredits} credits\n`;
+  result += `You earned ${totalVolumeDeCreditos()} credits\n`;
 
   return result;
 }
