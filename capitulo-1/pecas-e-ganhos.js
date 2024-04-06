@@ -40,24 +40,30 @@ export function statement(invoice, plays) {
     return result;
   }
 
-  function dolar(valor) {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-    }).format(valor / 100);
+  for (let performance of invoice.performances) {
+    volumeCredits += volumeDeCreditosPara(performance);
   }
 
   for (let performance of invoice.performances) {
-    volumeCredits += volumeDeCreditosPara(performance);
-
     result += ` ${playFor(performance).name}: ${dolar(valorPara(performance))} (${
       performance.audience
     } seats)\n`;
+  }
+
+  for (let performance of invoice.performances) {
     totalAmount += valorPara(performance);
   }
+
   result += `Amount owed is ${dolar(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
-  // console.log(result)
+
   return result;
+}
+
+function dolar(valor) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format(valor / 100);
 }
