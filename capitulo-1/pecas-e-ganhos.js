@@ -40,21 +40,23 @@ export function statement(invoice, plays) {
     return result;
   }
 
-  const format = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  }).format;
+  function dolar(valor) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+    }).format(valor);
+  }
 
   for (let performance of invoice.performances) {
     volumeCredits += volumeDeCreditosPara(performance);
 
-    result += ` ${playFor(performance).name}: ${format(valorPara(performance) / 100)} (${
+    result += ` ${playFor(performance).name}: ${dolar(valorPara(performance) / 100)} (${
       performance.audience
     } seats)\n`;
     totalAmount += valorPara(performance);
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`;
+  result += `Amount owed is ${dolar(totalAmount / 100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   // console.log(result)
   return result;
